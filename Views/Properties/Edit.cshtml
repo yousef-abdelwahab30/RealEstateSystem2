@@ -1,0 +1,112 @@
+@model Property
+@{
+    ViewData["Title"] = "Edit Property";
+}
+
+<h2>Edit Property</h2>
+<hr />
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Status" />
+    <input type="hidden" asp-for="CreatedAt" />
+
+    <div class="row">
+        <div class="col-md-8 mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="ListingType" class="form-label"></label>
+            <select asp-for="ListingType" class="form-select"
+                    asp-items="Html.GetEnumSelectList<ListingType>()"></select>
+        </div>
+
+        <div class="col-12 mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="PropertyTypeId" class="form-label"></label>
+            <select asp-for="PropertyTypeId" class="form-select" asp-items="ViewBag.PropertyTypeId">
+                <option value="">-- Select type --</option>
+            </select>
+            <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="CityId" class="form-label"></label>
+            <select asp-for="CityId" class="form-select" asp-items="ViewBag.CityId">
+                <option value="">-- Select city --</option>
+            </select>
+            <span asp-validation-for="CityId" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="AgentId" class="form-label"></label>
+            <select asp-for="AgentId" class="form-select" asp-items="ViewBag.AgentId">
+                <option value="">-- Select agent --</option>
+            </select>
+            <span asp-validation-for="AgentId" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 mb-3">
+            <label asp-for="Address" class="form-label"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="Area" class="form-label"></label>
+            <input asp-for="Area" class="form-control" />
+            <span asp-validation-for="Area" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="Bedrooms" class="form-label"></label>
+            <input asp-for="Bedrooms" class="form-control" />
+            <span asp-validation-for="Bedrooms" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="Bathrooms" class="form-label"></label>
+            <input asp-for="Bathrooms" class="form-control" />
+            <span asp-validation-for="Bathrooms" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-8 mb-3">
+            <label asp-for="ImageFile" class="form-label"></label>
+            <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+            <input type="hidden" asp-for="MainImageUrl" />
+            @if (!string.IsNullOrEmpty(Model?.MainImageUrl))
+            {
+                <img src="@Model.MainImageUrl" class="mt-2 rounded" style="height:90px" />
+            }
+        </div>
+
+        <div class="col-md-4 mb-3 d-flex align-items-end">
+            <div class="form-check">
+                <input asp-for="IsFurnished" class="form-check-input" />
+                <label asp-for="IsFurnished" class="form-check-label"></label>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

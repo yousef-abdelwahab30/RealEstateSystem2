@@ -1,0 +1,23 @@
+@model PropertyImage
+@{
+    ViewData["Title"] = "Image Details";
+}
+
+<h2>Image Details</h2>
+<hr />
+
+<img src="@Model.ImageUrl" class="img-fluid rounded mb-3" style="max-width:500px" />
+
+<dl class="row">
+    <dt class="col-sm-3">Property</dt>
+    <dd class="col-sm-9">@Model.Property?.Title</dd>
+
+    <dt class="col-sm-3">Image URL</dt>
+    <dd class="col-sm-9">@Model.ImageUrl</dd>
+
+    <dt class="col-sm-3">Display Order</dt>
+    <dd class="col-sm-9">@Model.DisplayOrder</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

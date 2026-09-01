@@ -1,0 +1,18 @@
+@model City
+@{
+    ViewData["Title"] = "City Details";
+}
+
+<h2>City Details</h2>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">Name</dt>
+    <dd class="col-sm-9">@Model.Name</dd>
+
+    <dt class="col-sm-3">Governorate</dt>
+    <dd class="col-sm-9">@Model.Governorate</dd>
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

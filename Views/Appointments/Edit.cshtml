@@ -1,0 +1,56 @@
+@model Appointment
+@{
+    ViewData["Title"] = "Edit Appointment";
+}
+
+<h2>Edit Appointment</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Status" />
+            <input type="hidden" asp-for="CreatedAt" />
+
+            <div class="mb-3">
+                <label asp-for="PropertyId" class="form-label"></label>
+                <select asp-for="PropertyId" class="form-select" asp-items="ViewBag.PropertyId">
+                    <option value="">-- Select property --</option>
+                </select>
+                <span asp-validation-for="PropertyId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VisitorName" class="form-label"></label>
+                <input asp-for="VisitorName" class="form-control" />
+                <span asp-validation-for="VisitorName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="VisitorPhone" class="form-label"></label>
+                <input asp-for="VisitorPhone" class="form-control" />
+                <span asp-validation-for="VisitorPhone" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="RequestedDate" class="form-label"></label>
+                <input asp-for="RequestedDate" type="datetime-local" class="form-control" />
+                <span asp-validation-for="RequestedDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Notes" class="form-label"></label>
+                <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

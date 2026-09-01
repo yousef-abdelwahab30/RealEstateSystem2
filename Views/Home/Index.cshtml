@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="p-5 mb-4 bg-light rounded-3 text-center">
+    <h1 class="display-5">Find Your Next Home</h1>
+    <p class="lead">Browse apartments, villas, offices and land for sale or rent across Egypt.</p>
+    <a asp-controller="Properties" asp-action="Search" class="btn btn-primary btn-lg">Search Properties</a>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Browse Listings</h5>
+                <p class="card-text">Filter by city, type, price range and number of bedrooms.</p>
+                <a asp-controller="Properties" asp-action="Index" class="btn btn-outline-primary">View All</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Book a Viewing</h5>
+                <p class="card-text">Request a visit and an agent will confirm your appointment.</p>
+                <a asp-controller="Appointments" asp-action="Create" class="btn btn-outline-primary">Book Now</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">List Your Property</h5>
+                <p class="card-text">Register as an agent to publish and manage your listings.</p>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-outline-primary">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
