@@ -3,109 +3,119 @@
     ViewData["Title"] = "Edit Property";
 }
 
-<h2>Edit Property</h2>
-<hr />
-
-<form asp-action="Edit" method="post" enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="Status" />
-    <input type="hidden" asp-for="CreatedAt" />
-
-    <div class="row">
-        <div class="col-md-8 mb-3">
-            <label asp-for="Title" class="form-label"></label>
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
+<div class="container mt-5 pt-4 mb-5">
+    <div class="card p-5 border-0 mx-auto" style="width: 100%; max-width: 950px; background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);">
+        <div class="mb-5">
+            <h2 style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700;">Edit Property</h2>
+            <div style="width: 50px; height: 2px; background-color: #D4B895; margin-top: 0.5rem; margin-bottom: 1.5rem;"></div>
+            <p style="color: #6B5B53; font-size: 0.95rem;">Update the comprehensive details of the property listing below.</p>
         </div>
 
-        <div class="col-md-4 mb-3">
-            <label asp-for="ListingType" class="form-label"></label>
-            <select asp-for="ListingType" class="form-select"
-                    asp-items="Html.GetEnumSelectList<ListingType>()"></select>
-        </div>
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-4" style="font-size: 0.9rem;"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Status" />
+            <input type="hidden" asp-for="CreatedAt" />
 
-        <div class="col-12 mb-3">
-            <label asp-for="Description" class="form-label"></label>
-            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
+            <div class="row">
+                <div class="col-md-8 mb-4">
+                    <label asp-for="Title" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <input asp-for="Title" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                    <span asp-validation-for="Title" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
 
-        <div class="col-md-4 mb-3">
-            <label asp-for="PropertyTypeId" class="form-label"></label>
-            <select asp-for="PropertyTypeId" class="form-select" asp-items="ViewBag.PropertyTypeId">
-                <option value="">-- Select type --</option>
-            </select>
-            <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
-        </div>
+                <div class="col-md-4 mb-4">
+                    <label asp-for="ListingType" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <select asp-for="ListingType" class="form-select" asp-items="Html.GetEnumSelectList<ListingType>()" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;"></select>
+                </div>
 
-        <div class="col-md-4 mb-3">
-            <label asp-for="CityId" class="form-label"></label>
-            <select asp-for="CityId" class="form-select" asp-items="ViewBag.CityId">
-                <option value="">-- Select city --</option>
-            </select>
-            <span asp-validation-for="CityId" class="text-danger"></span>
-        </div>
+                <div class="col-12 mb-4">
+                    <label asp-for="Description" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <textarea asp-for="Description" class="form-control" rows="4" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px; resize: none;"></textarea>
+                    <span asp-validation-for="Description" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
 
-        <div class="col-md-4 mb-3">
-            <label asp-for="AgentId" class="form-label"></label>
-            <select asp-for="AgentId" class="form-select" asp-items="ViewBag.AgentId">
-                <option value="">-- Select agent --</option>
-            </select>
-            <span asp-validation-for="AgentId" class="text-danger"></span>
-        </div>
+                <div class="col-md-4 mb-4">
+                    <label asp-for="PropertyTypeId" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <select asp-for="PropertyTypeId" class="form-select" asp-items="ViewBag.PropertyTypeId" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;">
+                        <option value="">-- Select type --</option>
+                    </select>
+                    <span asp-validation-for="PropertyTypeId" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
 
-        <div class="col-12 mb-3">
-            <label asp-for="Address" class="form-label"></label>
-            <input asp-for="Address" class="form-control" />
-            <span asp-validation-for="Address" class="text-danger"></span>
-        </div>
+                <div class="col-md-4 mb-4">
+                    <label asp-for="CityId" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <select asp-for="CityId" class="form-select" asp-items="ViewBag.CityId" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;">
+                        <option value="">-- Select city --</option>
+                    </select>
+                    <span asp-validation-for="CityId" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
 
-        <div class="col-md-3 mb-3">
-            <label asp-for="Price" class="form-label"></label>
-            <input asp-for="Price" class="form-control" />
-            <span asp-validation-for="Price" class="text-danger"></span>
-        </div>
+                <div class="col-md-4 mb-4">
+                    <label asp-for="AgentId" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <select asp-for="AgentId" class="form-select" asp-items="ViewBag.AgentId" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;">
+                        <option value="">-- Select agent --</option>
+                    </select>
+                    <span asp-validation-for="AgentId" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
 
-        <div class="col-md-3 mb-3">
-            <label asp-for="Area" class="form-label"></label>
-            <input asp-for="Area" class="form-control" />
-            <span asp-validation-for="Area" class="text-danger"></span>
-        </div>
+                <div class="col-12 mb-4">
+                    <label asp-for="Address" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <input asp-for="Address" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                    <span asp-validation-for="Address" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
 
-        <div class="col-md-3 mb-3">
-            <label asp-for="Bedrooms" class="form-label"></label>
-            <input asp-for="Bedrooms" class="form-control" />
-            <span asp-validation-for="Bedrooms" class="text-danger"></span>
-        </div>
+                <div class="col-md-3 mb-4">
+                    <label asp-for="Price" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <input asp-for="Price" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                    <span asp-validation-for="Price" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
 
-        <div class="col-md-3 mb-3">
-            <label asp-for="Bathrooms" class="form-label"></label>
-            <input asp-for="Bathrooms" class="form-control" />
-            <span asp-validation-for="Bathrooms" class="text-danger"></span>
-        </div>
+                <div class="col-md-3 mb-4">
+                    <label asp-for="Area" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <input asp-for="Area" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                    <span asp-validation-for="Area" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
 
-        <div class="col-md-8 mb-3">
-            <label asp-for="ImageFile" class="form-label"></label>
-            <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
-            <input type="hidden" asp-for="MainImageUrl" />
-            @if (!string.IsNullOrEmpty(Model?.MainImageUrl))
-            {
-                <img src="@Model.MainImageUrl" class="mt-2 rounded" style="height:90px" />
-            }
-        </div>
+                <div class="col-md-3 mb-4">
+                    <label asp-for="Bedrooms" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <input asp-for="Bedrooms" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                    <span asp-validation-for="Bedrooms" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
 
-        <div class="col-md-4 mb-3 d-flex align-items-end">
-            <div class="form-check">
-                <input asp-for="IsFurnished" class="form-check-input" />
-                <label asp-for="IsFurnished" class="form-check-label"></label>
+                <div class="col-md-3 mb-4">
+                    <label asp-for="Bathrooms" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <input asp-for="Bathrooms" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                    <span asp-validation-for="Bathrooms" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
+
+                <div class="col-md-8 mb-5">
+                    <label asp-for="ImageFile" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px; background-color: #F9F7F3;" />
+                    <input type="hidden" asp-for="MainImageUrl" />
+                    @if (!string.IsNullOrEmpty(Model?.MainImageUrl))
+                    {
+                        <div class="mt-3 p-2" style="border: 1px solid #E6DFD3; border-radius: 4px; display: inline-block;">
+                            <img src="@Model.MainImageUrl" class="rounded" style="height: 100px; object-fit: cover;" />
+                        </div>
+                    }
+                </div>
+
+                <div class="col-md-4 mb-5 d-flex align-items-center">
+                    <div class="form-check">
+                        <input asp-for="IsFurnished" class="form-check-input" style="border-color: #D4B895; width: 1.2rem; height: 1.2rem; margin-top: 0.2rem;" />
+                        <label asp-for="IsFurnished" class="form-check-label ms-2" style="color: #2C1E16; font-weight: 500;"></label>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-</form>
+            <div class="d-flex gap-3 pt-3" style="border-top: 1px solid #E6DFD3;">
+                <button type="submit" class="btn px-5 py-2" style="background-color: #7C203A; color: #F9F7F3; font-weight: 500; border: none; border-radius: 4px;">Save Changes</button>
+                <a asp-action="Index" class="btn px-4 py-2" style="background-color: transparent; color: #7C203A; border: 1px solid #7C203A; font-weight: 500; border-radius: 4px; text-decoration: none;">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

@@ -3,40 +3,51 @@
     ViewData["Title"] = "Property Types";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Property Types</h2>
-    <a asp-action="Create" class="btn btn-primary">Add New</a>
-</div>
+<div class="container mt-5 pt-4 mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 0;">Property Types</h2>
+            <div style="width: 50px; height: 2px; background-color: #D4B895; margin-top: 0.5rem;"></div>
+        </div>
+        <a asp-action="Create" class="btn px-4 py-2" style="background-color: #7C203A; color: #F9F7F3; font-weight: 500; border: none; border-radius: 4px; text-decoration: none;">+ Add New Type</a>
+    </div>
 
-<table class="table table-bordered table-hover">
-    <thead class="table-dark">
-        <tr>
-            <th>Name</th>
-            <th>Active</th>
-            <th style="width:220px">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>
-                    @if (item.IsActive)
+    <div class="card border-0" style="background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); border-radius: 8px; overflow: hidden;">
+        <div class="table-responsive">
+            <table class="table mb-0" style="vertical-align: middle;">
+                <thead style="background-color: #F9F7F3; border-bottom: 2px solid #E6DFD3;">
+                    <tr>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">Name</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">Active</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none; width: 260px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
                     {
-                        <span class="badge bg-success">Yes</span>
+                        <tr style="border-bottom: 1px solid #E6DFD3;">
+                            <td style="padding: 1rem 1.5rem; color: #6B5B53; font-weight: 500;">@item.Name</td>
+                            <td style="padding: 1rem 1.5rem;">
+                                @if (item.IsActive)
+                                {
+                                    <span style="background-color: #E8F4EC; color: #2D5A3C; padding: 0.35rem 0.8rem; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">Yes</span>
+                                }
+                                else
+                                {
+                                    <span style="background-color: #F1F1F1; color: #6B5B53; padding: 0.35rem 0.8rem; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">No</span>
+                                }
+                            </td>
+                            <td style="padding: 1rem 1.5rem;">
+                                <div class="d-flex gap-2">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm px-3 py-1" style="border: 1px solid #7C203A; color: #7C203A; background-color: transparent; border-radius: 4px; font-weight: 500;">Details</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm px-3 py-1" style="border: 1px solid #D4B895; color: #2C1E16; background-color: transparent; border-radius: 4px; font-weight: 500;">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm px-3 py-1" style="background-color: #7C203A; color: #F9F7F3; border: 1px solid #7C203A; border-radius: 4px; font-weight: 500;">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
                     }
-                    else
-                    {
-                        <span class="badge bg-secondary">No</span>
-                    }
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

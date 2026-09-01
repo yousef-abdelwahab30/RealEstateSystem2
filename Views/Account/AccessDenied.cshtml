@@ -2,8 +2,18 @@
     ViewData["Title"] = "Access Denied";
 }
 
-<div class="text-center py-5">
-    <h1 class="text-danger">Access Denied</h1>
-    <p class="lead">You do not have permission to open this page.</p>
-    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Back to Home</a>
+<div class="container d-flex justify-content-center align-items-center mt-5 pt-5">
+    <div class="card text-center p-5 border-0" style="max-width: 550px; background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);">
+        <h2 class="mb-3" style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700;">Access Denied</h2>
+        
+        <div style="width: 50px; height: 2px; background-color: #D4B895; margin: 0 auto 1.5rem auto;"></div>
+        
+        <p class="lead mb-5" style="color: #6B5B53; font-size: 1.1rem;">
+            You do not have the required permissions to view this page. If you believe this is a mistake, please contact support.
+        </p>
+        
+        <div>
+            <a asp-controller="Home" asp-action="Index" class="btn px-5 py-2" style="background-color: #7C203A; color: #F9F7F3; border: 1px solid #7C203A; border-radius: 4px;">Back to Home</a>
+        </div>
+    </div>
 </div>

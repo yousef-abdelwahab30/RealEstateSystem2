@@ -3,52 +3,60 @@
     ViewData["Title"] = "Register";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-5">
-        <h2 class="mb-3">Create an Account</h2>
+<div class="container d-flex justify-content-center align-items-center mt-5 pt-4 mb-5">
+    <div class="card p-5 border-0" style="width: 100%; max-width: 600px; background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);">
+        <div class="text-center mb-4">
+            <h2 style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700;">Create an Account</h2>
+            <div style="width: 50px; height: 2px; background-color: #D4B895; margin: 0.5rem auto 1rem auto;"></div>
+            <p style="color: #6B5B53; font-size: 0.95rem;">Join us to manage properties and book viewings.</p>
+        </div>
 
         <form asp-action="Register" method="post">
-            <div asp-validation-summary="All" class="text-danger mb-2"></div>
+            <div asp-validation-summary="All" class="text-danger mb-3" style="font-size: 0.9rem;"></div>
 
-            <div class="mb-3">
-                <label asp-for="FullName" class="form-label"></label>
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
+            <div class="mb-4">
+                <label asp-for="FullName" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                <input asp-for="FullName" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                <span asp-validation-for="FullName" class="text-danger" style="font-size: 0.85rem;"></span>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="mb-4">
+                <label asp-for="Email" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                <input asp-for="Email" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                <span asp-validation-for="Email" class="text-danger" style="font-size: 0.85rem;"></span>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <label asp-for="Password" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <input asp-for="Password" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                    <span asp-validation-for="Password" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label asp-for="ConfirmPassword" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger" style="font-size: 0.85rem;"></span>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="ConfirmPassword" class="form-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="Role" class="form-label"></label>
-                <select asp-for="Role" class="form-select">
+            <div class="mb-5">
+                <label asp-for="Role" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                <select asp-for="Role" class="form-select" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;">
                     <option value="Customer">Customer - browse and book viewings</option>
                     <option value="Agent">Agent - list and manage properties</option>
                 </select>
-                <span asp-validation-for="Role" class="text-danger"></span>
+                <span asp-validation-for="Role" class="text-danger" style="font-size: 0.85rem;"></span>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Register</button>
+            <button type="submit" class="btn w-100 py-2 mb-3" style="background-color: #7C203A; color: #F9F7F3; font-weight: 500; border: none; border-radius: 4px; font-size: 1.1rem;">Register</button>
         </form>
 
-        <p class="mt-3 text-center">
-            Already have an account? <a asp-action="Login">Login</a>
-        </p>
+        <div class="text-center mt-2">
+            <p style="color: #6B5B53; font-size: 0.95rem;">
+                Already have an account? <a asp-action="Login" style="color: #7C203A; font-weight: 600; text-decoration: none;">Login here</a>
+            </p>
+        </div>
     </div>
 </div>
 

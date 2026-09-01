@@ -3,62 +3,74 @@
     ViewData["Title"] = "Properties";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Properties</h2>
-    <div>
-        <a asp-action="Search" class="btn btn-outline-primary">Search</a>
-        <a asp-action="Create" class="btn btn-primary">Add New</a>
+<div class="container mt-5 pt-4 mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 0;">Properties</h2>
+            <div style="width: 50px; height: 2px; background-color: #D4B895; margin-top: 0.5rem;"></div>
+        </div>
+        <div class="d-flex gap-3">
+            <a asp-action="Search" class="btn px-4 py-2" style="background-color: transparent; color: #7C203A; border: 1px solid #7C203A; font-weight: 500; border-radius: 4px; text-decoration: none;">Search</a>
+            <a asp-action="Create" class="btn px-4 py-2" style="background-color: #7C203A; color: #F9F7F3; font-weight: 500; border: none; border-radius: 4px; text-decoration: none;">+ Add New</a>
+        </div>
+    </div>
+
+    <div class="card border-0" style="background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); border-radius: 8px; overflow: hidden;">
+        <div class="table-responsive">
+            <table class="table mb-0" style="vertical-align: middle;">
+                <thead style="background-color: #F9F7F3; border-bottom: 2px solid #E6DFD3;">
+                    <tr>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">Title</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">Type</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">City</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">Price</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">For</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">Status</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none; width: 340px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="border-bottom: 1px solid #E6DFD3;">
+                            <td style="padding: 1rem 1.5rem; color: #2C1E16; font-weight: 600;">@item.Title</td>
+                            <td style="padding: 1rem 1.5rem; color: #6B5B53;">@item.PropertyType?.Name</td>
+                            <td style="padding: 1rem 1.5rem; color: #6B5B53;">@item.City?.Name</td>
+                            <td style="padding: 1rem 1.5rem; color: #7C203A; font-weight: 600;">@item.Price.ToString("N0") EGP</td>
+                            <td style="padding: 1rem 1.5rem; color: #6B5B53;">@item.ListingType</td>
+                            <td style="padding: 1rem 1.5rem;">
+                                @if (item.Status == PropertyStatus.Approved)
+                                {
+                                    <span style="background-color: #E8F4EC; color: #2D5A3C; padding: 0.35rem 0.8rem; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">@item.Status</span>
+                                }
+                                else if (item.Status == PropertyStatus.Pending)
+                                {
+                                    <span style="background-color: #FFF6E5; color: #9E7427; padding: 0.35rem 0.8rem; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">@item.Status</span>
+                                }
+                                else
+                                {
+                                    <span style="background-color: #F1F1F1; color: #6B5B53; padding: 0.35rem 0.8rem; border-radius: 4px; font-weight: 600; font-size: 0.85rem;">@item.Status</span>
+                                }
+                            </td>
+                            <td style="padding: 1rem 1.5rem;">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm px-3 py-1" style="border: 1px solid #7C203A; color: #7C203A; background-color: transparent; border-radius: 4px; font-weight: 500;">Details</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm px-3 py-1" style="border: 1px solid #D4B895; color: #2C1E16; background-color: transparent; border-radius: 4px; font-weight: 500;">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm px-3 py-1" style="background-color: #7C203A; color: #F9F7F3; border: 1px solid #7C203A; border-radius: 4px; font-weight: 500;">Delete</a>
+                                    
+                                    @if (item.Status == PropertyStatus.Pending)
+                                    {
+                                        <form asp-action="Approve" method="post" class="m-0">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm px-3 py-1" style="background-color: #2D5A3C; color: #FFFFFF; border: 1px solid #2D5A3C; border-radius: 4px; font-weight: 500;">Approve</button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
-<table class="table table-bordered table-hover align-middle">
-    <thead class="table-dark">
-        <tr>
-            <th>Title</th>
-            <th>Type</th>
-            <th>City</th>
-            <th>Price</th>
-            <th>For</th>
-            <th>Status</th>
-            <th style="width:240px">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Title</td>
-                <td>@item.PropertyType?.Name</td>
-                <td>@item.City?.Name</td>
-                <td>@item.Price.ToString("N0") EGP</td>
-                <td>@item.ListingType</td>
-                <td>
-                    @if (item.Status == PropertyStatus.Approved)
-                    {
-                        <span class="badge bg-success">@item.Status</span>
-                    }
-                    else if (item.Status == PropertyStatus.Pending)
-                    {
-                        <span class="badge bg-warning text-dark">@item.Status</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-secondary">@item.Status</span>
-                    }
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                    @if (item.Status == PropertyStatus.Pending)
-                    {
-                        <form asp-action="Approve" method="post" class="d-inline">
-                            <input type="hidden" name="id" value="@item.Id" />
-                            <button type="submit" class="btn btn-sm btn-success">Approve</button>
-                        </form>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

@@ -3,35 +3,48 @@
     ViewData["Title"] = "Property Images";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Property Images</h2>
-    <a asp-action="Create" class="btn btn-primary">Add New</a>
-</div>
+<div class="container mt-5 pt-4 mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 0;">Property Images</h2>
+            <div style="width: 50px; height: 2px; background-color: #D4B895; margin-top: 0.5rem;"></div>
+        </div>
+        <a asp-action="Create" class="btn px-4 py-2" style="background-color: #7C203A; color: #F9F7F3; font-weight: 500; border: none; border-radius: 4px; text-decoration: none;">+ Add New Image</a>
+    </div>
 
-<table class="table table-bordered table-hover align-middle">
-    <thead class="table-dark">
-        <tr>
-            <th style="width:140px">Preview</th>
-            <th>Property</th>
-            <th>Image URL</th>
-            <th>Order</th>
-            <th style="width:220px">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td><img src="@item.ImageUrl" style="width:120px;height:80px;object-fit:cover" /></td>
-                <td>@item.Property?.Title</td>
-                <td class="small">@item.ImageUrl</td>
-                <td>@item.DisplayOrder</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="card border-0" style="background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); border-radius: 8px; overflow: hidden;">
+        <div class="table-responsive">
+            <table class="table mb-0" style="vertical-align: middle;">
+                <thead style="background-color: #F9F7F3; border-bottom: 2px solid #E6DFD3;">
+                    <tr>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none; width: 140px;">Preview</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">Property</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">Image URL</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none;">Order</th>
+                        <th style="color: #2C1E16; font-weight: 600; padding: 1rem 1.5rem; border: none; width: 260px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="border-bottom: 1px solid #E6DFD3;">
+                            <td style="padding: 1rem 1.5rem;">
+                                <img src="@item.ImageUrl" class="rounded" style="width: 100px; height: 65px; object-fit: cover; border: 1px solid #E6DFD3;" alt="Thumbnail" />
+                            </td>
+                            <td style="padding: 1rem 1.5rem; color: #2C1E16; font-weight: 500;">@item.Property?.Title</td>
+                            <td style="padding: 1rem 1.5rem; color: #6B5B53; font-size: 0.85rem; word-break: break-all;">@item.ImageUrl</td>
+                            <td style="padding: 1rem 1.5rem; color: #6B5B53; font-weight: 500;">@item.DisplayOrder</td>
+                            <td style="padding: 1rem 1.5rem;">
+                                <div class="d-flex gap-2">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm px-3 py-1" style="border: 1px solid #7C203A; color: #7C203A; background-color: transparent; border-radius: 4px; font-weight: 500;">Details</a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm px-3 py-1" style="border: 1px solid #D4B895; color: #2C1E16; background-color: transparent; border-radius: 4px; font-weight: 500;">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm px-3 py-1" style="background-color: #7C203A; color: #F9F7F3; border: 1px solid #7C203A; border-radius: 4px; font-weight: 500;">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

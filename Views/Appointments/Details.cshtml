@@ -3,28 +3,39 @@
     ViewData["Title"] = "Appointment Details";
 }
 
-<h2>Appointment Details</h2>
-<hr />
+<div class="container mt-5 pt-4 mb-5">
+    <div class="card p-5 border-0 mx-auto" style="width: 100%; max-width: 650px; background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);">
+        <div class="mb-4 text-center">
+            <h2 style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700;">Appointment Details</h2>
+            <div style="width: 50px; height: 2px; background-color: #D4B895; margin: 0.5rem auto 1.5rem auto;"></div>
+            <p style="color: #6B5B53; font-size: 0.95rem;">Complete information for this scheduled viewing.</p>
+        </div>
 
-<dl class="row">
-    <dt class="col-sm-3">Property</dt>
-    <dd class="col-sm-9">@Model.Property?.Title</dd>
+        <div class="p-4 mb-5" style="background-color: #F9F7F3; border-radius: 4px; border: 1px solid #E6DFD3;">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 mb-3" style="color: #6B5B53; font-weight: 500;">Property</dt>
+                <dd class="col-sm-8 mb-3" style="color: #2C1E16; font-weight: 600;">@Model.Property?.Title</dd>
 
-    <dt class="col-sm-3">Visitor</dt>
-    <dd class="col-sm-9">@Model.VisitorName</dd>
+                <dt class="col-sm-4 mb-3" style="color: #6B5B53; font-weight: 500;">Visitor</dt>
+                <dd class="col-sm-8 mb-3" style="color: #2C1E16; font-weight: 600;">@Model.VisitorName</dd>
 
-    <dt class="col-sm-3">Phone</dt>
-    <dd class="col-sm-9">@Model.VisitorPhone</dd>
+                <dt class="col-sm-4 mb-3" style="color: #6B5B53; font-weight: 500;">Phone</dt>
+                <dd class="col-sm-8 mb-3" style="color: #2C1E16; font-weight: 600;">@Model.VisitorPhone</dd>
 
-    <dt class="col-sm-3">Visit Date</dt>
-    <dd class="col-sm-9">@Model.RequestedDate.ToString("dd/MM/yyyy HH:mm")</dd>
+                <dt class="col-sm-4 mb-3" style="color: #6B5B53; font-weight: 500;">Visit Date</dt>
+                <dd class="col-sm-8 mb-3" style="color: #2C1E16; font-weight: 600;">@Model.RequestedDate.ToString("dd/MM/yyyy HH:mm")</dd>
 
-    <dt class="col-sm-3">Status</dt>
-    <dd class="col-sm-9">@Model.Status</dd>
+                <dt class="col-sm-4 mb-3" style="color: #6B5B53; font-weight: 500;">Status</dt>
+                <dd class="col-sm-8 mb-3" style="color: #2C1E16; font-weight: 600;">@Model.Status</dd>
 
-    <dt class="col-sm-3">Notes</dt>
-    <dd class="col-sm-9">@Model.Notes</dd>
-</dl>
+                <dt class="col-sm-4 mb-0" style="color: #6B5B53; font-weight: 500;">Notes</dt>
+                <dd class="col-sm-8 mb-0" style="color: #2C1E16; font-weight: 600;">@Model.Notes</dd>
+            </dl>
+        </div>
 
-<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
-<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <div class="d-flex justify-content-center gap-3">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn px-5 py-2" style="background-color: #7C203A; color: #F9F7F3; font-weight: 500; border: none; border-radius: 4px; text-decoration: none;">Edit Appointment</a>
+            <a asp-action="Index" class="btn px-4 py-2" style="background-color: transparent; color: #7C203A; border: 1px solid #7C203A; font-weight: 500; border-radius: 4px; text-decoration: none;">Back to List</a>
+        </div>
+    </div>
+</div>

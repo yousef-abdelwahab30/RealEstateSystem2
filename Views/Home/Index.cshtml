@@ -2,37 +2,46 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="p-5 mb-4 bg-light rounded-3 text-center">
-    <h1 class="display-5">Find Your Next Home</h1>
-    <p class="lead">Browse apartments, villas, offices and land for sale or rent across Egypt.</p>
-    <a asp-controller="Properties" asp-action="Search" class="btn btn-primary btn-lg">Search Properties</a>
+<div class="container mt-4 mb-5">
+    <div class="p-5 text-center" style="background-color: #FFFFFF; border: 1px solid #E6DFD3; border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);">
+        <h1 class="display-4 mb-3" style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700;">Find Your Next Home</h1>
+        <div style="width: 80px; height: 2px; background-color: #D4B895; margin: 0 auto 1.5rem auto;"></div>
+        <p class="lead mb-5" style="color: #6B5B53; max-width: 600px; margin: 0 auto; font-size: 1.15rem;">
+            Browse apartments, villas, offices and land for sale or rent across Egypt.
+        </p>
+        <a asp-controller="Properties" asp-action="Search" class="btn px-5 py-3" style="background-color: #7C203A; color: #F9F7F3; font-weight: 500; border: none; border-radius: 4px; font-size: 1.1rem; text-decoration: none;">Search Properties</a>
+    </div>
 </div>
 
-<div class="row text-center">
-    <div class="col-md-4 mb-3">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">Browse Listings</h5>
-                <p class="card-text">Filter by city, type, price range and number of bedrooms.</p>
-                <a asp-controller="Properties" asp-action="Index" class="btn btn-outline-primary">View All</a>
+<div class="container mb-5">
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="card h-100 p-4 border-0" style="background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title mb-3" style="color: #2C1E16; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.4rem;">Browse Listings</h5>
+                    <p class="card-text mb-4" style="color: #6B5B53; font-size: 0.95rem;">Filter by city, type, price range and number of bedrooms.</p>
+                    <a asp-controller="Properties" asp-action="Index" class="btn mt-auto px-4 py-2" style="border: 1px solid #7C203A; color: #7C203A; background-color: transparent; border-radius: 4px; font-weight: 500; text-decoration: none; width: 100%;">View All</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4 mb-3">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">Book a Viewing</h5>
-                <p class="card-text">Request a visit and an agent will confirm your appointment.</p>
-                <a asp-controller="Appointments" asp-action="Create" class="btn btn-outline-primary">Book Now</a>
+        
+        <div class="col-md-4">
+            <div class="card h-100 p-4 border-0" style="background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title mb-3" style="color: #2C1E16; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.4rem;">Book a Viewing</h5>
+                    <p class="card-text mb-4" style="color: #6B5B53; font-size: 0.95rem;">Request a visit and an agent will confirm your appointment.</p>
+                    <a asp-controller="Appointments" asp-action="Create" class="btn mt-auto px-4 py-2" style="border: 1px solid #7C203A; color: #7C203A; background-color: transparent; border-radius: 4px; font-weight: 500; text-decoration: none; width: 100%;">Book Now</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4 mb-3">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">List Your Property</h5>
-                <p class="card-text">Register as an agent to publish and manage your listings.</p>
-                <a asp-controller="Account" asp-action="Register" class="btn btn-outline-primary">Register</a>
+        
+        <div class="col-md-4">
+            <div class="card h-100 p-4 border-0" style="background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title mb-3" style="color: #2C1E16; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.4rem;">List Your Property</h5>
+                    <p class="card-text mb-4" style="color: #6B5B53; font-size: 0.95rem;">Register as an agent to publish and manage your listings.</p>
+                    <a asp-controller="Account" asp-action="Register" class="btn mt-auto px-4 py-2" style="border: 1px solid #7C203A; color: #7C203A; background-color: transparent; border-radius: 4px; font-weight: 500; text-decoration: none; width: 100%;">Register</a>
+                </div>
             </div>
         </div>
     </div>

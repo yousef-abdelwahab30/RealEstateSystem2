@@ -3,80 +3,103 @@
     ViewData["Title"] = "Search Properties";
 }
 
-<h2>Search Properties</h2>
-<hr />
-
-<form asp-action="Search" method="get" class="row g-3 mb-4">
-    <div class="col-md-3">
-        <label class="form-label">City</label>
-        <select name="cityId" class="form-select" asp-items="ViewBag.CityId">
-            <option value="">All cities</option>
-        </select>
+<div class="container mt-5 pt-4 mb-5">
+    <div class="mb-4">
+        <h2 style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.2rem;">Search Properties</h2>
+        <div style="width: 60px; height: 2px; background-color: #D4B895; margin-top: 0.5rem; margin-bottom: 1.5rem;"></div>
+        <p style="color: #6B5B53; font-size: 0.95rem;">Find the perfect property by applying the filters below.</p>
     </div>
 
-    <div class="col-md-3">
-        <label class="form-label">Property Type</label>
-        <select name="propertyTypeId" class="form-select" asp-items="ViewBag.PropertyTypeId">
-            <option value="">All types</option>
-        </select>
+    <div class="card p-4 border-0 mb-5" style="background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); border-radius: 8px;">
+        <form asp-action="Search" method="get" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label" style="color: #2C1E16; font-weight: 500;">City</label>
+                <select name="cityId" class="form-select" asp-items="ViewBag.CityId" style="border: 1px solid #E6DFD3; padding: 0.6rem 1rem; border-radius: 4px;">
+                    <option value="">All cities</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label" style="color: #2C1E16; font-weight: 500;">Property Type</label>
+                <select name="propertyTypeId" class="form-select" asp-items="ViewBag.PropertyTypeId" style="border: 1px solid #E6DFD3; padding: 0.6rem 1rem; border-radius: 4px;">
+                    <option value="">All types</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label" style="color: #2C1E16; font-weight: 500;">For</label>
+                <select name="listingType" class="form-select" style="border: 1px solid #E6DFD3; padding: 0.6rem 1rem; border-radius: 4px;">
+                    <option value="">Sale or Rent</option>
+                    <option value="0">Sale</option>
+                    <option value="1">Rent</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label" style="color: #2C1E16; font-weight: 500;">Min Price</label>
+                <input type="number" name="minPrice" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.6rem 1rem; border-radius: 4px;" />
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label" style="color: #2C1E16; font-weight: 500;">Max Price</label>
+                <input type="number" name="maxPrice" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.6rem 1rem; border-radius: 4px;" />
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label" style="color: #2C1E16; font-weight: 500;">Min Bedrooms</label>
+                <input type="number" name="bedrooms" class="form-control" style="border: 1px solid #E6DFD3; padding: 0.6rem 1rem; border-radius: 4px;" />
+            </div>
+
+            <div class="col-md-10 d-flex align-items-end justify-content-end gap-3 mt-4">
+                <a asp-action="Index" class="btn px-4 py-2" style="background-color: transparent; color: #7C203A; border: 1px solid #7C203A; font-weight: 500; border-radius: 4px; text-decoration: none;">All Properties</a>
+                <button type="submit" class="btn px-5 py-2" style="background-color: #7C203A; color: #F9F7F3; font-weight: 500; border: none; border-radius: 4px;">Search</button>
+            </div>
+        </form>
     </div>
 
-    <div class="col-md-2">
-        <label class="form-label">For</label>
-        <select name="listingType" class="form-select">
-            <option value="">Sale or Rent</option>
-            <option value="0">Sale</option>
-            <option value="1">Rent</option>
-        </select>
-    </div>
+    @if (Model.Count == 0)
+    {
+        <div class="text-center p-5" style="background-color: #F9F7F3; border: 1px solid #E6DFD3; border-radius: 8px;">
+            <p style="color: #6B5B53; font-size: 1.1rem; margin: 0; font-weight: 500;">No properties match your search criteria. Try adjusting your filters.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0" style="background-color: #FFFFFF; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); border-radius: 8px; overflow: hidden;">
+                        @if (!string.IsNullOrEmpty(item.MainImageUrl))
+                        {
+                            <img src="@item.MainImageUrl" class="card-img-top w-100" style="height: 220px; object-fit: cover; border-bottom: 3px solid #D4B895;" alt="@item.Title" />
+                        }
+                        else
+                        {
+                            <div class="w-100 d-flex align-items-center justify-content-center" style="height: 220px; background-color: #F9F7F3; border-bottom: 3px solid #D4B895;">
+                                <span style="color: #D4B895; font-size: 0.9rem;">No Image Available</span>
+                            </div>
+                        }
 
-    <div class="col-md-2">
-        <label class="form-label">Min Price</label>
-        <input type="number" name="minPrice" class="form-control" />
-    </div>
+                        <div class="card-body p-4 d-flex flex-column">
+                            <h5 class="card-title mb-2" style="color: #2C1E16; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.25rem;">@item.Title</h5>
+                            <p class="mb-3" style="color: #6B5B53; font-size: 0.9rem;">@item.City?.Name — @item.PropertyType?.Name</p>
+                            
+                            <h4 class="mb-3" style="color: #7C203A; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.4rem;">@item.Price.ToString("N0") <span style="font-size: 0.9rem; color: #6B5B53; font-family: 'Outfit', sans-serif;">EGP</span></h4>
+                            
+                            <div class="d-flex gap-3 mb-4 py-2" style="border-top: 1px solid #E6DFD3; border-bottom: 1px solid #E6DFD3;">
+                                <span style="color: #6B5B53; font-size: 0.85rem; font-weight: 500;">@item.Bedrooms Bed</span>
+                                <span style="color: #E6DFD3;">|</span>
+                                <span style="color: #6B5B53; font-size: 0.85rem; font-weight: 500;">@item.Bathrooms Bath</span>
+                                <span style="color: #E6DFD3;">|</span>
+                                <span style="color: #6B5B53; font-size: 0.85rem; font-weight: 500;">@item.Area m²</span>
+                            </div>
 
-    <div class="col-md-2">
-        <label class="form-label">Max Price</label>
-        <input type="number" name="maxPrice" class="form-control" />
-    </div>
-
-    <div class="col-md-2">
-        <label class="form-label">Min Bedrooms</label>
-        <input type="number" name="bedrooms" class="form-control" />
-    </div>
-
-    <div class="col-md-3 d-flex align-items-end">
-        <button type="submit" class="btn btn-primary">Search</button>
-        <a asp-action="Index" class="btn btn-secondary ms-2">All Properties</a>
-    </div>
-</form>
-
-@if (Model.Count == 0)
-{
-    <div class="alert alert-info">No properties match your search.</div>
-}
-else
-{
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    @if (!string.IsNullOrEmpty(item.MainImageUrl))
-                    {
-                        <img src="@item.MainImageUrl" class="card-img-top" style="height:200px;object-fit:cover" />
-                    }
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Title</h5>
-                        <p class="text-muted mb-1">@item.City?.Name — @item.PropertyType?.Name</p>
-                        <p class="fw-bold text-primary">@item.Price.ToString("N0") EGP</p>
-                        <p class="small">
-                            @item.Bedrooms bed · @item.Bathrooms bath · @item.Area m²
-                        </p>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-primary">View</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn mt-auto py-2 w-100 text-center" style="border: 1px solid #7C203A; color: #7C203A; background-color: transparent; border-radius: 4px; font-weight: 500; text-decoration: none;">View Details</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-}
+            }
+        </div>
+    }
+</div>
