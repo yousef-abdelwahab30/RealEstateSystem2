@@ -2,6 +2,7 @@ using RealEstateSystem.Models;
 using RealEstateSystem.Models.Enums;
 using RealEstateSystem.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -14,19 +15,21 @@ namespace RealEstateSystem.Controllers
         private readonly ICityRepository cityRepository;
         private readonly IAgentRepository agentRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
-
+        private readonly UserManager<ApplicationUser> userManager; 
         public PropertiesController(
             IPropertyRepository _propertyRepository,
             IPropertyTypeRepository _propertyTypeRepository,
             ICityRepository _cityRepository,
             IAgentRepository _agentRepository,
-            IWebHostEnvironment _webHostEnvironment)
+            IWebHostEnvironment _webHostEnvironment,
+            UserManager<ApplicationUser> _userManager) 
         {
             propertyRepository = _propertyRepository;
             propertyTypeRepository = _propertyTypeRepository;
             cityRepository = _cityRepository;
             agentRepository = _agentRepository;
             webHostEnvironment = _webHostEnvironment;
+            userManager = _userManager;
         }
 
         public IActionResult Index()
@@ -89,6 +92,15 @@ namespace RealEstateSystem.Controllers
             if (property == null)
                 return NotFound();
 
+            if (!User.IsInRole("Admin"))
+            {
+                var currentUserId = userManager.GetUserId(User);
+                if (property.AgentId.ToString() != currentUserId)
+                {
+                    return Forbid(); 
+                }
+            }
+
             PopulateDropDowns(property);
             return View(property);
         }
@@ -99,6 +111,18 @@ namespace RealEstateSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                var existingProperty = propertyRepository.GetById(property.Id);
+                if (existingProperty == null) return NotFound();
+
+                if (!User.IsInRole("Admin"))
+                {
+                    var currentUserId = userManager.GetUserId(User);
+                    if (existingProperty.AgentId.ToString() != currentUserId)
+                    {
+                        return Forbid();
+                    }
+                }
+
                 if (property.ImageFile != null)
                     property.MainImageUrl = SaveImage(property.ImageFile);
 
@@ -118,6 +142,15 @@ namespace RealEstateSystem.Controllers
             if (property == null)
                 return NotFound();
 
+            if (!User.IsInRole("Admin"))
+            {
+                var currentUserId = userManager.GetUserId(User);
+                if (property.AgentId.ToString() != currentUserId)
+                {
+                    return Forbid();
+                }
+            }
+
             return View(property);
         }
 
@@ -125,6 +158,20 @@ namespace RealEstateSystem.Controllers
         [Authorize(Roles = "Admin,Agent")]
         public IActionResult DeleteConfirmed(int id)
         {
+            Property property = propertyRepository.GetById(id);
+            if (property == null)
+                return NotFound();
+
+            // --- فحص الملكية قبل الحذف الفعلي ---
+            if (!User.IsInRole("Admin"))
+            {
+                var currentUserId = userManager.GetUserId(User);
+                if (property.AgentId.ToString() != currentUserId)
+                {
+                    return Forbid();
+                }
+            }
+
             propertyRepository.Delete(id);
             propertyRepository.Save();
             return RedirectToAction("Index");

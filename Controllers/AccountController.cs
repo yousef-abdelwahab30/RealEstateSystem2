@@ -39,9 +39,10 @@ namespace RealEstateSystem.Controllers
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user, model.Role).Wait();
-                    signInManager.SignInAsync(user, false).Wait();
-                    return RedirectToAction("Index", "Home");
+                    string roleName = string.IsNullOrWhiteSpace(model.Role) ? "Agent" : model.Role;
+                    userManager.AddToRoleAsync(user, roleName);
+                    signInManager.SignInAsync(user, isPersistent:false);
+                    return RedirectToAction("Create", "Properties");
                 }
 
                 foreach (var error in result.Errors)
@@ -57,19 +58,25 @@ namespace RealEstateSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = userManager.FindByEmailAsync(model.Email).Result;
+                var user = await userManager.FindByEmailAsync(model.Email);
 
                 if (user != null)
                 {
-                    bool correctPassword = userManager.CheckPasswordAsync(user, model.Password).Result;
+                    bool correctPassword = await userManager.CheckPasswordAsync(user, model.Password);
 
                     if (correctPassword)
                     {
-                        signInManager.SignInAsync(user, model.RememberMe).Wait();
+                        await signInManager.SignInAsync(user, model.RememberMe);
+
+                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        {
+                            return Redirect(returnUrl);
+                        }
+
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -79,6 +86,7 @@ namespace RealEstateSystem.Controllers
 
             return View(model);
         }
+
 
         [HttpPost]
         public IActionResult Logout()
