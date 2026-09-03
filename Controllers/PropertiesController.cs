@@ -162,7 +162,7 @@ namespace RealEstateSystem.Controllers
             if (property == null)
                 return NotFound();
 
-            // --- فحص الملكية قبل الحذف الفعلي ---
+          
             if (!User.IsInRole("Admin"))
             {
                 var currentUserId = userManager.GetUserId(User);
