@@ -15,14 +15,15 @@ namespace RealEstateSystem.Controllers
         private readonly ICityRepository cityRepository;
         private readonly IAgentRepository agentRepository;
         private readonly IWebHostEnvironment webHostEnvironment;
-        private readonly UserManager<ApplicationUser> userManager; 
+        private readonly UserManager<ApplicationUser> userManager;
+
         public PropertiesController(
             IPropertyRepository _propertyRepository,
             IPropertyTypeRepository _propertyTypeRepository,
             ICityRepository _cityRepository,
             IAgentRepository _agentRepository,
             IWebHostEnvironment _webHostEnvironment,
-            UserManager<ApplicationUser> _userManager) 
+            UserManager<ApplicationUser> _userManager)
         {
             propertyRepository = _propertyRepository;
             propertyTypeRepository = _propertyTypeRepository;
@@ -94,10 +95,12 @@ namespace RealEstateSystem.Controllers
 
             if (!User.IsInRole("Admin"))
             {
-                var currentUserId = userManager.GetUserId(User);
-                if (property.AgentId.ToString() != currentUserId)
+                var currentUserEmail = User.Identity?.Name;
+                var currentAgent = agentRepository.GetAll().FirstOrDefault(a => a.Email == currentUserEmail);
+
+                if (currentAgent == null || property.AgentId != currentAgent.Id)
                 {
-                    return Forbid(); 
+                    return Forbid();
                 }
             }
 
@@ -116,8 +119,10 @@ namespace RealEstateSystem.Controllers
 
                 if (!User.IsInRole("Admin"))
                 {
-                    var currentUserId = userManager.GetUserId(User);
-                    if (existingProperty.AgentId.ToString() != currentUserId)
+                    var currentUserEmail = User.Identity?.Name;
+                    var currentAgent = agentRepository.GetAll().FirstOrDefault(a => a.Email == currentUserEmail);
+
+                    if (currentAgent == null || existingProperty.AgentId != currentAgent.Id)
                     {
                         return Forbid();
                     }
@@ -144,8 +149,10 @@ namespace RealEstateSystem.Controllers
 
             if (!User.IsInRole("Admin"))
             {
-                var currentUserId = userManager.GetUserId(User);
-                if (property.AgentId.ToString() != currentUserId)
+                var currentUserEmail = User.Identity?.Name;
+                var currentAgent = agentRepository.GetAll().FirstOrDefault(a => a.Email == currentUserEmail);
+
+                if (currentAgent == null || property.AgentId != currentAgent.Id)
                 {
                     return Forbid();
                 }
@@ -164,8 +171,10 @@ namespace RealEstateSystem.Controllers
 
             if (!User.IsInRole("Admin"))
             {
-                var currentUserId = userManager.GetUserId(User);
-                if (property.AgentId.ToString() != currentUserId)
+                var currentUserEmail = User.Identity?.Name;
+                var currentAgent = agentRepository.GetAll().FirstOrDefault(a => a.Email == currentUserEmail);
+
+                if (currentAgent == null || property.AgentId != currentAgent.Id)
                 {
                     return Forbid();
                 }
