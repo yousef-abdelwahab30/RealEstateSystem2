@@ -40,6 +40,12 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+                <label asp-for="Phone" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
+                <input asp-for="Phone" class="form-control" placeholder="01xxxxxxxxx" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;" />
+                <span asp-validation-for="Phone" class="text-danger" style="font-size: 0.85rem;"></span>
+            </div>
+
             <div class="mb-5">
                 <label asp-for="Role" class="form-label" style="color: #2C1E16; font-weight: 500;"></label>
                 <select asp-for="Role" class="form-select" style="border: 1px solid #E6DFD3; padding: 0.75rem 1rem; border-radius: 4px;">

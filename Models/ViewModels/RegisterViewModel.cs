@@ -20,6 +20,10 @@ namespace RealEstateSystem.Models.ViewModels
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [StringLength(20)]
+        [Display(Name = "Phone (agents only)")]
+        public string Phone { get; set; }
+
         [Required]
         [Display(Name = "Register As")]
         public string Role { get; set; }

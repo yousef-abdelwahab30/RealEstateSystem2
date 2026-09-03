@@ -69,6 +69,22 @@ namespace RealEstateSystem.Controllers
         [Authorize(Roles = "Admin,Agent")]
         public IActionResult Create(Property property)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                var currentAgent = agentRepository.GetAll()
+                    .FirstOrDefault(a => a.Email == User.Identity.Name);
+
+                if (currentAgent == null)
+                {
+                    ModelState.AddModelError("", "Your agent profile was not found. Please contact the administrator.");
+                    PopulateDropDowns(property);
+                    return View(property);
+                }
+
+                property.AgentId = currentAgent.Id;
+                ModelState.Remove("AgentId");
+            }
+
             if (ModelState.IsValid)
             {
                 property.CreatedAt = DateTime.Now;

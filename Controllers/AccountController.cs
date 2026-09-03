@@ -1,5 +1,6 @@
 using RealEstateSystem.Models;
 using RealEstateSystem.Models.ViewModels;
+using RealEstateSystem.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +10,16 @@ namespace RealEstateSystem.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IAgentRepository agentRepository;
 
         public AccountController(
             UserManager<ApplicationUser> _userManager,
-            SignInManager<ApplicationUser> _signInManager)
+            SignInManager<ApplicationUser> _signInManager,
+            IAgentRepository _agentRepository)
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            agentRepository = _agentRepository;
         }
 
         public IActionResult Register()
@@ -49,6 +53,20 @@ namespace RealEstateSystem.Controllers
                             ModelState.AddModelError("", error.Description);
 
                         return View(model);
+                    }
+
+                    if (roleName == "Agent")
+                    {
+                        Agent agent = new Agent
+                        {
+                            FullName = model.FullName,
+                            Email = model.Email,
+                            Phone = string.IsNullOrWhiteSpace(model.Phone) ? "Not set" : model.Phone,
+                            AgencyName = model.FullName
+                        };
+
+                        agentRepository.Add(agent);
+                        agentRepository.Save();
                     }
 
                     await signInManager.SignInAsync(user, isPersistent: false);
