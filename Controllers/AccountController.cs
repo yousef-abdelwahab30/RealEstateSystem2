@@ -24,7 +24,7 @@ namespace RealEstateSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -35,14 +35,28 @@ namespace RealEstateSystem.Controllers
                     FullName = model.FullName
                 };
 
-                var result = userManager.CreateAsync(user, model.Password).Result;
+                var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    string roleName = string.IsNullOrWhiteSpace(model.Role) ? "Agent" : model.Role;
-                    userManager.AddToRoleAsync(user, roleName);
-                    signInManager.SignInAsync(user, isPersistent:false);
-                    return RedirectToAction("Create", "Properties");
+                    string roleName = string.IsNullOrWhiteSpace(model.Role) ? "Customer" : model.Role;
+
+                    var roleResult = await userManager.AddToRoleAsync(user, roleName);
+
+                    if (!roleResult.Succeeded)
+                    {
+                        foreach (var error in roleResult.Errors)
+                            ModelState.AddModelError("", error.Description);
+
+                        return View(model);
+                    }
+
+                    await signInManager.SignInAsync(user, isPersistent: false);
+
+                    if (roleName == "Agent")
+                        return RedirectToAction("Create", "Properties");
+
+                    return RedirectToAction("Index", "Home");
                 }
 
                 foreach (var error in result.Errors)
